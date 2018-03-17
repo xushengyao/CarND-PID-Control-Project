@@ -66,7 +66,7 @@ int main()
           if (steer_value < -1){
             steer_value = -1;
           }
-          throttle_value = 0.75 - pid_throttle.TotalError();
+          throttle_value = 1 - pid_throttle.TotalError();
           if (throttle_value > 1){
             throttle_value = 1;
           }
