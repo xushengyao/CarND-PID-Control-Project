@@ -68,7 +68,7 @@ int main()
           }
 
           pid_throttle.UpdateError(fabs(cte));
-          throttle_value = 1 + pid_throttle.TotalError();
+          throttle_value = 0.8 + pid_throttle.TotalError();
           if (throttle_value > 1){
             throttle_value = 1;
           }
