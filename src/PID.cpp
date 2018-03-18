@@ -19,13 +19,13 @@ void PID::Init(double Kp, double Ki, double Kd) {
   p_error = 0.0;
   i_error = 0.0;
   d_error = 0.0;
-  
+
   parameter.push_back(Kp);
   parameter.push_back(Ki);
   parameter.push_back(Kd);
 
   //twiddle parameters
-  need_twiddle = false;
+  need_twiddle = true;
 
   step = 1;
    // let the car run at first 100 steps, then in the next 3000 steps add the cte^2 to the total_error
