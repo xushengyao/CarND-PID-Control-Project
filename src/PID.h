@@ -8,17 +8,17 @@ class PID {
 
 private:
   int step;
-  std::vector<double> changes;
-  double best_error;
-  double total_error;
-  int index_param;
+  std::vector<double> dp;
+  double best_err;
+  double err;
+  int idx;
   int val_step;
   int test_step;
   int fail_counter;
 
-  void IndexMove();
+  void MoveIndex();
 
-  bool need_twiddle;
+  bool is_twiddle;
 
 public:
   /*
@@ -31,8 +31,8 @@ public:
   /*
   * Coefficients
   */
+  // For twiddle
   std::vector<double> parameter;
-
 
   double Kp;
   double Ki;

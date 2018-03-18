@@ -20,27 +20,24 @@ void PID::Init(double Kp, double Ki, double Kd) {
   i_error = 0.0;
   d_error = 0.0;
 
+  //twiddle flag
+  is_twiddle = true;
+
   parameter.push_back(Kp);
   parameter.push_back(Ki);
   parameter.push_back(Kd);
 
-  //twiddle parameters
-  need_twiddle = true;
-
   step = 1;
-   // let the car run at first 100 steps, then in the next 3000 steps add the cte^2 to the total_error
   val_step = 100;
   test_step = 2000;
 
   for (int i = 0; i < 3; ++i) {
-     // init the change rate with the value of 0.1*parameter
-     changes.push_back(0.1 * parameter[i]);
+     dp.push_back(0.1 * parameter[i]);
   }
-  index_param = 0;
+  idx = 0;
 
-  best_error = std::numeric_limits<double>::max();
-  total_error = 0;
-   // fail to make the total_error better times
+  better_err = std::numeric_limits<double>::max();
+  err = 0;
   fail_counter = 0;
 
 }
@@ -50,50 +47,48 @@ void PID::UpdateError(double cte) {
   p_error = cte;
   i_error += cte;
 
-  if(need_twiddle){
+  if(is_twiddle){
         if(step % (val_step + test_step) > val_step){
-            total_error += (cte * cte);
+            err += (cte * cte);
         }
 
         if(step % (val_step + test_step) == 0){
             std::cout<<"==============  step "<<step<<" =============="<<std::endl;
             std::cout << "P: "<< parameter[0]<<" I: "<<parameter[1]<<" D: "<<parameter[2]<<std::endl;
             if (step == (val_step + test_step)){
-                if(total_error < best_error){
-                    best_error = total_error;
-
+                if(err < better_err){
+                    better_err = err;
                 }
-                parameter[index_param] += changes[index_param];
+                parameter[idx] += dp[idx];
             } else{
-                if(total_error < best_error){
-                    best_error = total_error;
-                    changes[index_param] *= 1.1;
-                    IndexMove();
-                    parameter[index_param] += changes[index_param];
+                if(err < better_err){
+                    better_err = err;
+                    dp[idx] *= 1.1;
+                    MoveIndex();
+                    parameter[idx] += dp[idx];
                     fail_counter = 0;
                 } else if(fail_counter == 0){
-                    parameter[index_param] -= (2*changes[index_param]);
+                    parameter[idx] -= (2*dp[idx]);
                     fail_counter++;
                 } else{
-                    parameter[index_param] += changes[index_param];
-                    changes[index_param] *= 0.9;
-                    IndexMove();
-                    parameter[index_param] += changes[index_param];
+                    parameter[idx] += dp[idx];
+                    dp[idx] *= 0.9;
+                    MoveIndex();
+                    parameter[idx] += dp[idx];
                     fail_counter = 0;
                 }
             }
-
-            std::cout << "best_error: "<< best_error<<" total_error: "<<total_error<<std::endl;
-            std::cout << "change_index: "<<index_param<<" new_parameter: "<<parameter[index_param]<<std::endl;
+            std::cout << "better_err: "<< better_err<<" err: "<<err<<std::endl;
+            std::cout << "variable_index: "<<idx<<" new_value: "<<parameter[idx]<<std::endl;
             std::cout <<  std::endl;
-            total_error = 0;
+            err = 0;
         }
     }
     step++;
 }
 
 double PID::TotalError() {
-  if (need_twiddle){
+  if (is_twiddle){
     return -parameter[0] * p_error - parameter[1] * i_error - parameter[2] * d_error;
   }
   else{
@@ -101,9 +96,9 @@ double PID::TotalError() {
   }
 }
 
-void PID::IndexMove() {
-    index_param++;
-    if(index_param >=3){
-        index_param = 0;
+void PID::MoveIndex() {
+    idx++;
+    if(idx >=3){
+        idx = 0;
     }
 }
