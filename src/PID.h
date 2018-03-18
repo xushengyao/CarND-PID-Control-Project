@@ -9,7 +9,6 @@ class PID {
 private:
   int step;
   std::vector<double> changes;
-  std::vector<double> parameter;
   double best_error;
   double total_error;
   int index_param;
@@ -32,6 +31,9 @@ public:
   /*
   * Coefficients
   */
+  std::vector<double> parameter;
+
+
   double Kp;
   double Ki;
   double Kd;
