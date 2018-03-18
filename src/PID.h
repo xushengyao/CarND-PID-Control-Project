@@ -9,7 +9,7 @@ class PID {
 private:
   int step;
   std::vector<double> dp;
-  double best_err;
+  double better_err;
   double err;
   int idx;
   int val_step;
