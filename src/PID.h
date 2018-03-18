@@ -2,6 +2,22 @@
 #define PID_H
 
 class PID {
+
+private:
+  int step;
+  std::vector<double> changes;
+  std::vector<double> parameter;
+  double best_error;
+  double total_error;
+  int index_param;
+  int val_step;
+  int test_step;
+  int fail_counter;
+
+  void IndexMove();
+
+  bool need_twiddle;
+
 public:
   /*
   * Errors
@@ -12,7 +28,7 @@ public:
 
   /*
   * Coefficients
-  */ 
+  */
   double Kp;
   double Ki;
   double Kd;
