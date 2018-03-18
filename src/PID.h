@@ -1,6 +1,9 @@
 #ifndef PID_H
 #define PID_H
 
+#include <cmath>
+#include <vector>
+
 class PID {
 
 private:
