@@ -34,7 +34,6 @@ int main()
 
   PID pid_steer, pid_throttle;
   // TODO: Initialize the pid variable.
-  //pid_steer.Init(0.102542, 0.000017019, 2.96919);
   pid_steer.Init(0.125571, 0.000011019, 3.616919);
   pid_throttle.Init(0.285003, 0.0000, 0.0202662);
   h.onMessage([&pid_steer, &pid_throttle](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
@@ -83,7 +82,7 @@ int main()
           msgJson["steering_angle"] = steer_value;
           msgJson["throttle"] = throttle_value;
           auto msg = "42[\"steer\"," + msgJson.dump() + "]";
-        //  std::cout << msg << std::endl;
+          std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
         }
       } else {
