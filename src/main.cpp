@@ -72,8 +72,8 @@ int main()
           if (throttle_value > 1){
             throttle_value = 1;
           }
-          if (speed < 10){
-            throttle_value = 0.1
+          if (speed < 10 ){
+            throttle_value = 0.3;
           }
           // DEBUG
         //  std::cout << "CTE: " << cte << " Steering Value: " << steer_value << " Throttle Value: " << throttle_value << std::endl;
