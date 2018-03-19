@@ -34,8 +34,8 @@ int main()
 
   PID pid_steer, pid_throttle;
   // TODO: Initialize the pid variable.
-  pid_steer.Init(0.1, 0.0001, 0.2991);
-  pid_throttle.Init(0.32667, 0.0000, 0.0215);
+  pid_steer.Init(0.1, 0.0001, 3.2991);
+  pid_throttle.Init(0.32667, 0.0000, 0.022518);
   h.onMessage([&pid_steer, &pid_throttle](uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, uWS::OpCode opCode) {
     // "42" at the start of the message means there's a websocket message event.
     // The 4 signifies a websocket message
