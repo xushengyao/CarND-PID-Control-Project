@@ -17,7 +17,6 @@ private:
   int fail_counter;
 
   void MoveIndex();
-
   bool is_twiddle;
 
 public:

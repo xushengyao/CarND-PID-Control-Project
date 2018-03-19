@@ -35,7 +35,6 @@ void PID::Init(double Kp, double Ki, double Kd) {
      dp.push_back(0.1 * parameter[i]);
   }
   idx = 0;
-
   better_err = std::numeric_limits<double>::max();
   err = 0;
   fail_counter = 0;
