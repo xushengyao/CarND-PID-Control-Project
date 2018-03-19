@@ -3,6 +3,19 @@ Self-Driving Car Engineer Nanodegree Program
 
 ---
 
+## Rubric Points
+
+
+#### Describe the effect each of the P, I, D components had in your implementation.
+* P refers to Proportional, the control output is proportional to the current error. Here, the P term is to
+* I refers to Integral, which is the running sum of the error. Here,
+* D refers to Derivative, the control output is proportional to the future error. The D parameter will help the car keep in the center instead of overshooting.
+
+#### Describe how the final hyperparameters were chosen.
+
+* I used both manual tuning and twiddle algorithm to tweak the P, I, D coefficients for steering PID and throttle PID. At the beginning, it's difficult to keep the car in the track using the twiddle algorithm only. Thus, I had to manually try different coefficients so that the car could at least staying in the track. After that, I started to implement the twiddle algorithm to tune the parameters. Since I used two PIDs for both steering angle and throttle position control, the twiddle algorithm is also running simultaneously for both PID coefficients. After about 300000 steps, the resulted coefficients are used as my final PID hyperparameters.
+
+---
 ## Dependencies
 
 * cmake >= 3.5
@@ -19,7 +32,7 @@ Self-Driving Car Engineer Nanodegree Program
   * Run either `./install-mac.sh` or `./install-ubuntu.sh`.
   * If you install from source, checkout to commit `e94b6e1`, i.e.
     ```
-    git clone https://github.com/uWebSockets/uWebSockets 
+    git clone https://github.com/uWebSockets/uWebSockets
     cd uWebSockets
     git checkout e94b6e1
     ```
@@ -33,7 +46,7 @@ There's an experimental patch for windows in this [PR](https://github.com/udacit
 1. Clone this repo.
 2. Make a build directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
-4. Run it: `./pid`. 
+4. Run it: `./pid`.
 
 Tips for setting up your environment can be found [here](https://classroom.udacity.com/nanodegrees/nd013/parts/40f38239-66b6-46ec-ae68-03afd8a601c8/modules/0949fca6-b379-42af-a919-ee50aa304e6a/lessons/f758c44c-5e40-4e01-93b5-1a82aa4e044f/concepts/23d376c7-0195-4276-bdf0-e02f1f3c665d)
 
@@ -95,4 +108,3 @@ still be compilable with cmake and make./
 
 ## How to write a README
 A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
-
