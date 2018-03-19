@@ -7,9 +7,9 @@ Self-Driving Car Engineer Nanodegree Program
 
 
 #### Describe the effect each of the P, I, D components had in your implementation.
-* P refers to Proportional, the control output is proportional to the current error. Here, the P term is to
-* I refers to Integral, which is the running sum of the error. Here,
-* D refers to Derivative, the control output is proportional to the future error. The D parameter will help the car keep in the center instead of overshooting.
+* P refers to Proportional, the control output is proportional to the current error. Here, the P term is to reduce the car's distance from the center of the lane. The P only controller will easily cause overshoots.
+* I refers to Integral, which is the running sum of the error. Here, it used to eliminate the system bias which prevent the car from reaching the center of the lane. While, if I coefficient is too large, the car will drive in a unstable manner, and it has been set as a small number in this implementation.
+* D refers to Derivative, the control output is proportional to the future error. The D term could remove the oscillations so that it could help the car keep in the center lane instead of overshooting.
 
 #### Describe how the final hyperparameters were chosen.
 
