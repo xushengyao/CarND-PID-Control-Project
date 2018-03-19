@@ -21,7 +21,7 @@ void PID::Init(double Kp, double Ki, double Kd) {
   d_error = 0.0;
 
   //twiddle flag
-  is_twiddle = false;
+  is_twiddle = true;
 
   parameter.push_back(Kp);
   parameter.push_back(Ki);
